@@ -12,6 +12,4 @@ image:
   height: 30rem
 ogType: website
 twitterCardCype: summary
-eleventyNavigation:
-  key: Home
 ---

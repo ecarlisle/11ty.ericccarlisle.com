@@ -16,7 +16,7 @@ ogType: article
 twitter_card_type: summary
 eleventyNavigation:
   parent: Blog
-  key: {{title}}
+  key: 1
 ---
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id sem nec arcu varius scelerisque. Quisque tristique magna sit amet quam tincidunt, eu pretium libero convallis. Praesent rutrum sodales dolor sed dignissim. In at orci in neque viverra vulputate ut ut leo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Suspendisse in tellus quis est convallis eleifend. Phasellus elit diam, iaculis non ante sollicitudin, commodo placerat nisi. Quisque nec nibh vel nulla venenatis sagittis sit amet et mi. Ut imperdiet turpis non tempus dapibus. Etiam non velit elit. Vivamus molestie porta finibus.
 
