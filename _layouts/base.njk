@@ -1,0 +1,154 @@
+<!-- template variables -->
+{%- set pageTitle -%}
+  {%- if metaTitle -%}
+    {{metaTitle}}
+  {%- elif title -%}
+    {{title}}
+  {%- endif -%}
+{%- endset -%}
+
+
+<!doctype html>
+<html lang="{{ site.lang }}">
+  <head>
+
+    <!-- preconnect, prefetches -->    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="//www.google-analytics.com">
+    <link rel="dns-prefetch" href="//www.googletagmanager.com">
+
+    <!-- HTML title, description -->    
+    <title>{{pageTitle}}</title>
+    <meta name="description" content="{{description}}">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{{site.hostname}}{{permalink}}" />
+  
+    <!-- Open graph metadata -->
+    <meta property="og:title" content="{{pageTitle}}">
+    <meta property="og:type" content="{{ogType}}">
+    <meta property="og:url" content="{{site.hostname}}">
+    <meta property="og:description" content="{{description}}">
+    {% if image.path %}<meta property="og:image" content="{{site.hostname}}{{image.path}}" />{% endif %}
+    {% if image.type %}<meta property="og:image:type" content="{{image.type}}" />{% endif %}
+    {% if image.width %}<meta property="og:image:width" content="{{image.width}}" />{% endif %}
+    {% if image.height %}<meta property="og:image:height" content="{{image.height}}" />{% endif %}
+    {% if image.alt %}<meta property="og:image:alt" content="{{image.alt}}" />{% endif %}
+    <meta property="og:locale" content="{{site.locale}}" />
+    <meta property="og:site_name" content="{{site.site_name}}" />
+    
+    <!-- Ignore -->
+    {% if ignore %}
+      <meta name="robots" content="noindex"/>
+    {% endif %}
+    
+    <!-- Twitter metadata -->
+    <meta name="twitter:card" content="{%- if twitterCardType -%}{{twitterCardType}}{%- else -%}summary{%- endif -%}" />
+    <meta name="twitter:site" content="{{site.author.twitter_username}}" />
+    <meta name="twitter:creator" content="{{site.author.twitter_username}}" />
+    <meta name="twitter:description" content="{{description}}" />
+    {% if image.path %}<meta name="twitter:image" content="{{image.path}}" />{% endif %}
+    {% if image.alt %}<meta name="twitter:image:alt" content="{{image.alt}}">{% endif %}
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2&family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Exo+2&family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
+    <!--<link rel="manifest" href="/site.webmanifest">-->
+
+    <link rel="stylesheet" href="/css/main.css?v=1.0">
+  
+    <!-- Analytics -->
+    {% if site.environment == 'production' %}
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6DZF30BMQY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-6DZF30BMQY');
+    </script>
+
+    {% endif %}
+
+    <!-- JSON+LD Website -->
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "name": "{{site.site_name}}",
+      "url": "{{site.hostname}}",
+      "sameAs": [
+        "https://github.com/{{site.author.twitter_username}}",
+        "https://twitter.com/{{site.author.github_username}}",
+        "https://www.linkedin.com/in/{{site.author.linkedin_username}}/"
+      ],
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "http://example.com/pages/search_results?q={search_term}",
+        "query-input": "required name=search_term"
+      }
+    }
+    </script>
+
+    <!-- JSON+LD Breadcrumbs -->
+    {% include './ldjson/breadcrumbs.njk' %}
+
+  </head>
+  <body>
+    <a class="sr-only" href="#main-content">Skip to main content</a>
+    <header role="banner">
+      <a href="/" class="site-title">
+        Eric Carlisle
+      </a>
+      <nav class="main-nav" role="navigation" aria-label="Main Navigation">
+        {% set navPages = collections.section | eleventyNavigation %}
+        <ul role="menubar">
+          <li>
+            <a {% if page.url == '/' %}class="active" aria-current="page" {% endif %} href="/">Home</a>
+          </li>
+          {%- for entry in navPages -%}
+          <li role="menuitem">
+            <a href="{{hostname}}{{ entry.url | url }}"{% if entry.url == page.url %} class="active" aria-current="page" {% endif %}>{{ entry.title }}</a>
+          </li>
+        {%- endfor -%}
+        </ul>
+      </nav>
+    </header>
+    <div class="grid">
+    <main id="main-content">
+      {% if tags and tags.includes("post") %}
+      {% set navPages = collections.all | eleventyNavigation %}     
+        <h1>{{title}}</h1>
+        <time class="byline" datetime="{{date}}">{{ date | formatDate }}</time>
+        {{ content | safe }}
+      {% else %}
+        {{ content | safe }}
+      {% endif %}
+    </main>
+    <aside>
+      <figure>
+      <picture>
+        <source type="image/webp" srcset="/img/author/eric-carlisle-300x300.webp">
+        <source type="image/jpeg" srcset="/img/author/eric-carlisle-300x300.jpg">
+        <img width="300" height="300" src="/img/author/eric-carlisle-300x300.jpg" alt="Eric Carlisle">
+      </picture>
+        <figcaption>
+          <strong>Eric Carlisle</strong> is a UI Engineer and UX Strategist.
+        </figcaption>
+      </figure>
+    </aside>
+    </div>
+    <footer role="contentinfo">
+      © 2021 : Eric Carlisle
+    </footer>
+  </body>
+</html>

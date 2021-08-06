@@ -1,0 +1,39 @@
+---
+title: "Blog"
+metaTitle: "Eric Carlisle : UI Developer, UX Developer"
+description: "This is the homepage"
+tags: 
+  - section
+layout: base.njk
+permalink: /blog/
+image:
+  path: /img/author/eric-carlisle-300x300.jpg
+  alt: Eric Carlisle
+  type: image/jpeg
+  width: 30rem
+  height: 30rem
+ogType: website
+twitterCardCype: summary
+eleventyNavigation:
+  key: Blog
+  parent: Home
+  order: 2
+---
+
+<h1>Blog</h1>
+
+<ul class="content-list">
+{%- for item in collections.post %}
+  <article>
+    <li>
+      <h2>
+        <a href="{{item.url}}">
+          {{ item.data.title }}
+        </a>
+      </h2>
+      <time class="byline" datetime="{{item.data.date}}">{{ item.data.date | formatDate }}</time>
+      {{ item.data.page.excerpt | safe }}
+    </li>
+  </article>
+{% endfor -%}
+</ul>

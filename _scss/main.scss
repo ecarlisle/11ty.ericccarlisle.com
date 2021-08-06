@@ -1,0 +1,158 @@
+@use "sass:map";
+@use 'reset';
+@use 'variables' as var;
+@use 'mixins' as mix;
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  background: map-get(var.$colors , 'white');
+  color: map-get(var.$colors , 'black');
+  font: 300 1.6em / 1.5em map-get(var.$font-stacks , content);
+}
+
+header {
+  font-family: 3.4rem/1.5 sans-serif;
+  @include mix.mq(md) {
+    align-items: baseline;
+    border: 1px solid map-get(var.$colors , 'silver');
+    border-width: 0 0 1px 0;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  a {
+    color: #000;
+    text-decoration: none;
+  }
+}
+
+hr {
+  border: 1px solid map-get(var.$colors , 'silver');
+  border-width: 0 0 1px 0;
+}
+
+.main-nav {
+  border: 1px solid map-get(var.$colors , 'silver');
+  border-width: 1px 0;
+  font: 1.6rem/1 map-get(var.$font-stacks , content);
+  @include mix.mq(md) {
+    border-width: 0;
+    font-size: 2rem;
+  }
+
+  & a {
+    text-transform: uppercase;
+    &.active {
+      text-decoration: underline;
+    }
+  }
+
+  & ul {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 1rem;
+
+    & li {
+      padding: 1rem;
+      text-align: center;
+      a {     
+        display: inline-block;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+.site-title {
+  display: block;
+  font: 3.2rem/1 map-get(var.$font-stacks , titles);
+  @include mix.mq(md) {
+    font: 4rem/1 map-get(var.$font-stacks , titles);
+  }
+  padding: 2rem;
+}
+
+.first-name {
+  color: #036;
+}
+
+.last-name {
+  color: #369;
+}
+main {
+  padding: 2rem;
+  @include mix.mq(md) {
+    width: 80%;
+  }
+}
+
+aside {
+  padding: 2rem;
+  @include mix.mq(md) {
+    width: 20%;
+  }
+}
+
+h1 {
+  font: 400 2.6rem / 2rem map-get(var.$font-stacks , content);
+  margin: 0 0 2rem 0;
+}
+
+h2 {
+  font: 400 2.2rem / 2rem map-get(var.$font-stacks , content);
+  margin: 0 0 1.6rem 0;
+
+  a {
+    text-decoration: none;
+    color: #034078;
+
+  }
+
+}
+
+footer {
+  padding: 2rem;
+  text-align: right;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+p {
+  margin: 0 0 2rem 0;
+}
+
+.grid {
+  max-width: 168rem;
+  margin: 0 auto;
+  @include mix.mq(md) {
+    display: flex;
+  }
+}
+
+
+.photo {
+  border-radius: 0.5rem;
+}
+
+.sr-only {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+time.byline {
+  border: solid 1px #eee;
+  border-width: 1px 0;
+  display: block;
+  padding: 1rem 0;
+  margin: 0 0 2rem 0;
+}

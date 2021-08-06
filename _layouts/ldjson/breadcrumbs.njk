@@ -1,0 +1,24 @@
+{#{% set crumbs = collections.all | eleventyNavigationBreadcrumb(eleventyNavigation.key) %}#}
+
+<script type = "application/ld+json"> 
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+  {#
+{% for i in range(0, crumbs) -%}
+  {
+    "@type": "ListItem",
+    "position": {{crumbs[i]+1}},
+    "name": "{{crumbs[i].title}}",
+    "item": "{{crumbs[i].url | url}}"
+  },
+{% endfor %}
+#}
+{
+    "@type": "ListItem",
+    "position": "",
+    "name": "{{meta_title}}"
+  }]
+} 
+</script>
